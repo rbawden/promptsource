@@ -128,7 +128,16 @@ def filter_datasets():
                 filtered_datasets.append(dataset_name)
             continue
 
-        filtered_datasets.append(dataset_name)
+        if "cardData" not in dataset:
+            continue
+        metadata = dataset["cardData"]
+
+        if "language" not in metadata:
+            continue
+        languages = metadata["language"]
+
+        if "en" in languages or "en-US" in languages:
+            english_datasets.append(dataset_name)
 
     return sorted(filtered_datasets)
 
